@@ -1,0 +1,131 @@
+#include<stdio.h>
+#include<conio.h>
+#include <windows.h>
+#include <stdlib.h>
+#include <math.h>
+double jsjg(double, double, double);
+double jspd(double, double, double);
+double srpd_double(double, double, double);
+double sr_double(double, double);
+
+main()
+{
+	int zpd = 1;
+	do
+	{
+		printf("欢迎使用自动2次函数处理器\n");
+		printf("请在下方按提示输入\n（提示：输入完一个数据后请输人回车）\n");
+		int pd1 = 0;
+		double a,b,c;
+		do
+		{
+		printf("请输入二次项系数\n");
+		a = sr_double(-1000,1000);
+		printf("请输入一次项系数\n");
+		b = sr_double(-1000,1000);
+		printf("请输入常数项\n");
+		c = sr_double(-1000,1000);
+		printf("你机智的程序正在计算中\n");
+		loding();
+		system("cls");
+		printf("方程为%fx^2+%fx+%f", a, b, c);
+		printf("是吗？\n");
+		printf("输入1为是输入0为否\n");
+		int pd2 = sr_int(0,1);
+		if (pd2)
+			pd1 = 0;
+		else
+			pd1 = 1;
+		} while (pd1);
+		if (srpd_double(jspd(a, b, c), 0, 32767))
+		{	
+			loding();
+			printf("此方程的解为%f和%f", (-b + jsjg(a, b, c)) / 2 * a, (-b - jsjg(a, b, c)) / 2 * a);
+			printf("计算结束是否更换数值计算\n");
+			printf("输入1为是输入0为否\n");
+			int pd3 = sr_int(0, 1);
+			if (pd3)
+				zpd = 1;
+			else
+				zpd = 0;
+		}
+		else
+		{
+			printf("方程无解是否更换数值计算\n");
+			printf("输入1为是输入0为否\n");
+			int pd3 = sr_int(0, 1);
+			if (pd3)
+				zpd = 1;
+			else
+				zpd = 0;
+		}	
+		system("cls");
+	} while (zpd);
+}
+
+int sr_int(int xiao, int da) 
+{
+	int sr;
+	scanf("%d", &sr);
+    while (!srpd_int(sr, xiao, da))
+	{
+		scanf("%d", &sr);
+		printf("输入数据错误请重新输入\n");
+	}
+		printf("输入数据正确\n运算中\n");
+		return sr;
+}
+
+int srpd_int(int pds,int fw1, int fw2)
+{
+	int jg = 0;
+	if (pds <= fw2 && pds >= fw1)
+		jg = 1;
+	return jg;
+}
+
+double srpd_double(double pds, double fw1, double fw2)
+{
+	int jg = 0;
+	if (pds <= fw2 && pds >= fw1)
+		jg = 1;
+	return jg;
+}
+
+double sr_double(double xiao, double da)
+{
+	double sr;
+	scanf("%lf", &sr);
+	while (!srpd_double(sr, xiao, da))
+	{
+		scanf("%lf", &sr);
+		printf("输入数据错误请重新输入\n");
+	}
+	printf("输入数据正确\n运算中\n");
+	return sr;
+}
+
+
+double jsjg(double a,double b,double c)
+{
+	double e = sqrt(jspd(a, b, c));
+	return e;
+}
+
+double jspd(double a, double b, double c)
+{
+	double d = (b * b) - (4 * (a * c));
+	return d;
+}
+
+int loding()
+{
+	int i;
+	for (i = 0; i < 30; i++)
+	{
+		Sleep(10);
+		printf("■");
+	}
+	printf("\n");
+	return 0;
+}
